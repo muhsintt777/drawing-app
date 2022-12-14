@@ -9,6 +9,22 @@ function App() {
   const [lineWidth, setLineWidth] = useState(5);
   const [lineColor, setLineColor] = useState("black");
 
+  const [canvasData, setCanvasData] = useState([]);
+  const indexRef = useRef(-1);
+
+  const onUndo = () => {
+    if (canvasData.length <= 1) {
+      console.log("clear");
+      onClear();
+    } else {
+      indexRef.current -= 1;
+      const currData = canvasData;
+      currData.pop();
+      setCanvasData(currData);
+      ctxRef.current.putImageData(canvasData[indexRef.current], 0, 0);
+    }
+  };
+
   const onStart = (e) => {
     ctxRef.current.beginPath();
     ctxRef.current.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
@@ -29,6 +45,8 @@ function App() {
       canvasRef.current.width,
       canvasRef.current.height
     );
+    setCanvasData([]);
+    indexRef.current = -1;
   };
 
   const onDraw = (e) => {
@@ -41,12 +59,28 @@ function App() {
 
   const onEnd = (e) => {
     ctxRef.current.closePath();
+
+    if (isDrawing || e.type !== "mouseout") {
+      console.log("add");
+      setCanvasData((prev) => {
+        return [
+          ...prev,
+          ctxRef.current.getImageData(
+            0,
+            0,
+            canvasRef.current.width,
+            canvasRef.current.height
+          ),
+        ];
+      });
+      indexRef.current += 1;
+    }
     setIsDrawing(false);
   };
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     ctx.lineCap = "round";
     ctx.linejoin = "round";
     ctx.strokeStyle = lineColor;
@@ -57,6 +91,7 @@ function App() {
   return (
     <div className="App">
       <Header
+        onUndo={onUndo}
         onClear={onClear}
         setLineWidth={setLineWidth}
         setLineColor={setLineColor}
@@ -65,6 +100,7 @@ function App() {
         onMouseDown={onStart}
         onMouseMove={onDraw}
         onMouseUp={onEnd}
+        onMouseOut={onEnd}
         ref={canvasRef}
         className="app-canvas"
         width={`1280px`}

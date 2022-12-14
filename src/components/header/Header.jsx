@@ -2,7 +2,7 @@ import React from "react";
 import ColorButton from "../colorButton/ColorButton";
 import "./Header.css";
 
-const Header = ({ setLineWidth, setLineColor, onClear }) => {
+const Header = ({ setLineWidth, setLineColor, onClear, onUndo }) => {
   return (
     <header>
       <ColorButton setLineColor={setLineColor} color={"red"} />
@@ -28,7 +28,13 @@ const Header = ({ setLineWidth, setLineColor, onClear }) => {
         type="range"
         name="range"
       />
-      <button style={{ color: "blue" }} className="header-undoBtn">
+      <button
+        onClick={() => {
+          onUndo();
+        }}
+        style={{ color: "blue" }}
+        className="header-undoBtn"
+      >
         undo
       </button>
       <button
