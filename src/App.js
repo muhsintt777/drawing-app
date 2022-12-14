@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
-import Canvas from "./components/canvas/Canvas";
+// import Canvas from "./components/canvas/Canvas";
 
 function App() {
   const canvasRef = useRef();
@@ -8,15 +8,17 @@ function App() {
   useEffect(() => {
     window.addEventListener("mousemove", (e) => {
       console.log({ x: e.clientX, y: e.clientY });
+      const bondingRect = canvasRef.current.getBoundingClientRect();
+      console.log({
+        x: e.clientX - bondingRect.left,
+        y: e.clientY - bondingRect.top,
+      });
     });
   }, []);
   return (
     <div className="App">
-      <Canvas width={"200 px"} height={"200 px"} />
-      <canvas
-        ref={canvasRef}
-        style={{ border: "1px solid black", marginLeft: "30px" }}
-      />
+      {/* <Canvas width={"200 px"} height={"200 px"} /> */}
+      <canvas ref={canvasRef} className="app-canvas" />
     </div>
   );
 }

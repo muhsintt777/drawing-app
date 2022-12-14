@@ -5,3 +5,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.app-canvas {
+  width: 80%;
+  height: 80vh;
+  border: 2px solid black;
+}
