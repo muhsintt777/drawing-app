@@ -15,6 +15,22 @@ function App() {
     setIsDrawing(true);
   };
 
+  const onClear = () => {
+    ctxRef.current.fillStyle = "white";
+    ctxRef.current.clearRect(
+      0,
+      0,
+      canvasRef.current.width,
+      canvasRef.current.height
+    );
+    ctxRef.current.fillRect(
+      0,
+      0,
+      canvasRef.current.width,
+      canvasRef.current.height
+    );
+  };
+
   const onDraw = (e) => {
     if (!isDrawing) {
       return;
@@ -40,7 +56,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header setLineWidth={setLineWidth} setLineColor={setLineColor} />
+      <Header
+        onClear={onClear}
+        setLineWidth={setLineWidth}
+        setLineColor={setLineColor}
+      />
       <canvas
         onMouseDown={onStart}
         onMouseMove={onDraw}
