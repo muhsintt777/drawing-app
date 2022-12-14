@@ -14,7 +14,6 @@ function App() {
 
   const onUndo = () => {
     if (canvasData.length <= 1) {
-      console.log("clear");
       onClear();
     } else {
       indexRef.current -= 1;
@@ -61,7 +60,6 @@ function App() {
     ctxRef.current.closePath();
 
     if (isDrawing || e.type !== "mouseout") {
-      console.log("add");
       setCanvasData((prev) => {
         return [
           ...prev,
