@@ -2,13 +2,13 @@ import React from "react";
 import ColorButton from "../colorButton/ColorButton";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ setLineWidth, setLineColor }) => {
   return (
     <header>
-      <ColorButton color={"red"} />
-      <ColorButton color={"green"} />
-      <ColorButton color={"blue"} />
-      <ColorButton color={"yellow"} />
+      <ColorButton setLineColor={setLineColor} color={"red"} />
+      <ColorButton setLineColor={setLineColor} color={"green"} />
+      <ColorButton setLineColor={setLineColor} color={"blue"} />
+      <ColorButton setLineColor={setLineColor} color={"yellow"} />
 
       <input
         title="Choose Color"
