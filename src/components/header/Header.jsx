@@ -16,7 +16,15 @@ const Header = ({ setLineWidth, setLineColor }) => {
         type="color"
         name="color"
       />
-      <input min="1" max="100" type="range" name="range" />
+      <input
+        onChange={(e) => {
+          setLineWidth(e.target.value);
+        }}
+        min="1"
+        max="10"
+        type="range"
+        name="range"
+      />
       <button style={{ color: "blue" }} className="header-undoBtn">
         undo
       </button>
