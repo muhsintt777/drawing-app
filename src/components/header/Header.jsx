@@ -11,6 +11,9 @@ const Header = ({ setLineWidth, setLineColor }) => {
       <ColorButton setLineColor={setLineColor} color={"yellow"} />
 
       <input
+        onChange={(e) => {
+          setLineColor(e.target.value);
+        }}
         title="Choose Color"
         className="header-colorInp"
         type="color"
