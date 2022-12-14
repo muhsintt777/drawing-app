@@ -12,9 +12,15 @@ header {
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  box-shadow: 0 0 5px rgb(0, 0, 0);
+  box-shadow: 0 0 5px rgb(0, 0, 0, 0.5);
   background-color: white;
   cursor: pointer;
+  font-weight: bold;
+}
+.header-clearBtn:hover,
+.header-undoBtn:hover {
+  background-color: #f5f5f5;
+  transition: all 0.3s;
 }
 
 .header-colorInp {
