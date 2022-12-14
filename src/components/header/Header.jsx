@@ -20,6 +20,8 @@ const Header = ({ setLineWidth, setLineColor, onClear, onUndo }) => {
         name="color"
       />
       <input
+        style={{ cursor: "pointer" }}
+        title="Line Width"
         onChange={(e) => {
           setLineWidth(e.target.value);
         }}
