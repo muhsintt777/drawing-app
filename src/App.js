@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
+import Header from "./components/header/Header";
 // import Canvas from "./components/canvas/Canvas";
 
 function App() {
@@ -9,18 +10,19 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("mousemove", (e) => {
-      console.log({ x: e.clientX, y: e.clientY });
+      // console.log({ x: e.clientX, y: e.clientY });
       const boundingRect = canvasRef.current.getBoundingClientRect();
       ctx.current = canvasRef.current.getContext("2d");
       point.current = {
         x: e.clientX - boundingRect.left,
         y: e.clientY - boundingRect.top,
       };
-      console.log(point.current);
+      // console.log(point.current);
     });
   }, []);
   return (
     <div className="App">
+      <Header />
       {/* <Canvas width={"200 px"} height={"200 px"} /> */}
       <canvas ref={canvasRef} className="app-canvas" />
     </div>

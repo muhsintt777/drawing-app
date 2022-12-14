@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 440px;
+  padding: 20px 0px;
+}
+
+.header-undoBtn,
+.header-clearBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgb(0, 0, 0);
+  background-color: white;
+  cursor: pointer;
+}
+
+.header-colorInp {
+  width: 50px;
+  height: 50px;
+  border: none;
+}
