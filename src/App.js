@@ -10,18 +10,38 @@ function App() {
   const [lineColor, setLineColor] = useState("black");
 
   const [canvasData, setCanvasData] = useState([]);
+  const [redoData, setRedoData] = useState([]);
   const indexRef = useRef(-1);
 
   const onUndo = () => {
+    if (!canvasData.length) {
+      return;
+    }
     if (canvasData.length <= 1) {
+      const currCanData = canvasData;
+      setRedoData([...redoData, ...currCanData]);
       onClear();
     } else {
       indexRef.current -= 1;
       const currData = canvasData;
-      currData.pop();
+      const imageData = currData.pop();
+      setRedoData([...redoData, imageData]);
       setCanvasData(currData);
       ctxRef.current.putImageData(canvasData[indexRef.current], 0, 0);
     }
+  };
+
+  const onRedo = () => {
+    console.log("redo");
+    const currData = redoData;
+    if (!currData.length) {
+      return;
+    }
+    ctxRef.current.putImageData(currData[currData.length - 1], 0, 0);
+    const imageData = currData.pop();
+    indexRef.current += 1;
+    setCanvasData([...canvasData, imageData]);
+    setRedoData(currData);
   };
 
   const onStart = (e) => {
@@ -89,6 +109,7 @@ function App() {
   return (
     <div className="App">
       <Header
+        onRedo={onRedo}
         onUndo={onUndo}
         onClear={onClear}
         setLineWidth={setLineWidth}
