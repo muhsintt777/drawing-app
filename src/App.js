@@ -13,6 +13,10 @@ function App() {
   const [redoData, setRedoData] = useState([]);
   const indexRef = useRef(-1);
 
+  const clearRedo = () => {
+    setRedoData([]);
+  };
+
   const onUndo = () => {
     if (!canvasData.length) {
       return;
@@ -109,6 +113,7 @@ function App() {
   return (
     <div className="App">
       <Header
+        clearRedo={clearRedo}
         onRedo={onRedo}
         onUndo={onUndo}
         onClear={onClear}
