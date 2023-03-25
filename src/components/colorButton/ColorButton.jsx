@@ -1,4 +1,3 @@
-import React from "react";
 import "./ColorButton.css";
 
 const ColorButton = ({ color, setLineColor }) => {

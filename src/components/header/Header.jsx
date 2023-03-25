@@ -1,6 +1,5 @@
-import React from "react";
-import ColorButton from "../colorButton/ColorButton";
 import "./Header.css";
+import ColorButton from "../colorButton/ColorButton";
 
 const Header = ({
   setLineWidth,
